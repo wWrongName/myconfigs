@@ -14,9 +14,9 @@ filetype indent on      " load filetype-specific indent files
 
 " for tabulation
 set smartindent
-set tabstop=2
+set tabstop=4
 set expandtab
-set shiftwidth=2
+set shiftwidth=4
 
 inoremap jk <esc>
 
@@ -65,6 +65,13 @@ call plug#end()
 
 " Leader bind to space
 let mapleader = ","
+
+" trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " Netrw file explorer settings
 let g:netrw_banner = 0 " hide banner above files
