@@ -22,6 +22,7 @@ inoremap jk <esc>
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'rust-lang/rust.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -73,15 +74,19 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checkti
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
+" Rust settings
+let g:rust_clip_command = 'xclip -selection clipboard'
+let g:rustfmt_autosave = 1
+
 " Netrw file explorer settings
 let g:netrw_banner = 0 " hide banner above files
 let g:netrw_liststyle = 3 " tree instead of plain view
 let g:netrw_browse_split = 3 " vertical split window when Enter pressed on file
 
 " Automatically format frontend files with prettier after file save
-let g:prettier#autoformat = 1
+let g:prettier#autoformat = 0
 let g:prettier#autoformat_require_pragma = 0
-
+let g:prettier#config#semi = get(g:,'prettier#config#semi', 'false')
 " Disable quickfix window for prettier
 let g:prettier#quickfix_enabled = 0
 
